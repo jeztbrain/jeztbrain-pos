@@ -1,0 +1,83 @@
+{
+  "name": "jeztbrain-pos-erp",
+  "private": true,
+  "version": "2.4.0",
+  "type": "module",
+  "description": "CHIKARRO QSR POS & ERP (Powered by JeztBrain)",
+  "author": "JeztBrain",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/YOUR_GITHUB_USER/jeztbrain-pos-erp.git"
+  },
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "electron:dev": "concurrently \"npm run dev\" \"wait-on tcp:5173 && electron .\"",
+    "electron:build": "vite build && electron-builder --win",
+    "electron:publish": "vite build && electron-builder --win --publish always"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.0",
+    "dotenv": "^18.0.10",
+    "electron-is-dev": "^3.0.1",
+    "electron-updater": "^6.8.11",
+    "jspdf": "^4.2.1",
+    "jspdf-autotable": "^5.0.9",
+    "lucide-react": "^0.468.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "autoprefixer": "^10.4.20",
+    "concurrently": "^10.0.7",
+    "electron": "^45.3.0",
+    "electron-builder": "^26.18.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "typescript": "~5.6.2",
+    "vite": "^6.0.3",
+    "wait-on": "^9.5.1"
+  },
+  "build": {
+    "appId": "com.jeztbrain.chikarropos",
+    "productName": "CHIKARRO POS",
+    "copyright": "Powered by JeztBrain",
+    "directories": {
+      "output": "release",
+      "buildResources": "build"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "CHIKARRO-POS-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "CHIKARRO POS"
+    },
+    "publish": [
+      "github"
+    ]
+  }
+}
